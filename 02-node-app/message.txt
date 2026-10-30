@@ -1,1 +1,2 @@
-Welcome to the DevOps Docker Lab!
+
+Hello from my updated Docker assignment!
