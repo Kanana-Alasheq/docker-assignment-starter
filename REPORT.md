@@ -113,6 +113,16 @@ no
 How I fixed it:
 no
 ___________________
+*Short Questions:*
+
+1. What does 8080:80 mean?
+   Host port 8080 maps to container port 80.
+
+2. Is this container a full Virtual Machine? Explain in one or two sentences 
+   No, it shares the host's Linux kernel.
+
+3. Which command showed you the container logs?
+   docker logs web-server
 
 ## Mission 5 - Docker Hub
 
@@ -132,7 +142,18 @@ The first push failed because the username contained uppercase letters
 
 How I fixed it:
 used the lowercase username and pushed the image successfully
-___________________
+__________________
+_
+*Short Questions:*
+
+1. What was wrong?
+   The container port mapping was incorrect.
+
+2. Which command helped you find the problem? 
+   docker logs broken-app
+
+3. In your fixed command, what is the host port and what is the container port?
+   Host port:8080, container port:3000
 
 ## Mission 6 - Remote Deployment
 
@@ -155,6 +176,11 @@ Docker was not installed on the Ubuntu VM initially, and DNS resolution was not 
 How I fixed it:
 I installed Docker, fixed DNS settings, logged in to Docker Hub, and successfully ran the container
 ____________________
+
+*Short Question:*
+
+Why is a registry useful when developers and servers are different machines?
+Because it allows servers to download images from Docker Hub without copying project files
 
 ## Mission 7 - Volumes
 
@@ -184,6 +210,17 @@ How I fixed it:
 created and reused the named volume ---> mongo-data
 ______________________
 
+*Short Questions:*
+
+1. Why was the old record missing after you created a fresh container?
+   Because the new container had fresh storage.
+
+2. Why did the data survive after you attached mongo-data?
+   Because the named volume preserved the data.
+
+3. **What is the diffrence between deleting a container and deleting a volume? 
+   Deleting a container removes it; deleting a volume removes the stored data
+
 ## Mission 8 - Docker Networking
 
 Commands used:
@@ -208,28 +245,51 @@ I changed DB_HOST from localhost to postgres, stopped the old node-app container
 and recreated the app container to connect it to the Compose network
 
 ____________________
+*Short Questions:*
+
+1- What did localhost point to inside the app container?
+   The app container itself.
+
+2- Which hostname fixed the connection? 
+   `postgres`.
+
+3- Why is using the service name better than hard-coding a container IP address? 
+   Docker Compose resolves service names automatically
 
 ## Mission 9 - Docker Compose
 
 Commands used:
-
-____________________
+docker compose config
+docker compose up -d
+docker compose ps
+docker compose down
+docker compose up -d
 
 What happened:
-
-____________________
+created a Docker Compose stack with PostgreSQL and pgAdmin then I connected pgAdmin to PostgreSQL using the service name
+postgres.After restarting the stack, the devopsdb database was still available.
 
 What I learned:
-
-____________________
+run multiple services using Docker Compose, configure environment variables, and use named volumes to preserve database data
 
 Problem I faced:
-
-____________________
+used the wrong PostgreSQL username. After restarting the stack, the registered server disappeared from pgAdmin
 
 How I fixed it:
-
+corrected the database connection settings and registered the PostgreSQL server again. I confirmed that the database is
+still available
 ____________________
+
+*Short Questions:*
+
+1- Why does pgAdmin use the service name instead of localhost?
+Because Docker Compose services communicate using their service names on the shared network.
+
+2- Which service needs a host port for the browser?
+port 5050
+
+3- What happens to the named volume after docker compose down?
+The named volume remains and keeps the PostgreSQL data
 
 ## Bonus Mission
 
